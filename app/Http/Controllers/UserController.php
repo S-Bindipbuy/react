@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Themes;
+use Inertia\Response;
+
+class UserController extends Controller
+{
+    public function All(): Response
+    {
+        return inertia("Dashboard", [
+            "users" => User::with("themes:id,name")->get([
+                "id",
+                "name",
+                "email",
+                "image",
+                "themes_id",
+            ]),
+        ]);
+    }
+
+    public function Login(): RedirectResponse
+    {
+        $user = request()->validate([
+            "email" => "required|email",
+            "password" => "required|min:8",
+        ]);
+        if (!Auth::attempt($user)) {
+            return redirect("login");
+        }
+        return redirect("dashboard");
+    }
+    public function Logout(): RedirectResponse
+    {
+        Auth::logout();
+        return redirect("login");
+    }
+
+    public function Theme(): RedirectResponse
+    {
+        $themes = request()->validate([
+            "themes" => "required|string",
+        ]);
+        $auth = Auth::user();
+        $auth->update([
+            "themes_id" => Themes::find(request()->themes)
+                ? request()->themes
+                : $auth->themes_id,
+        ]);
+        return redirect()->back();
+    }
+
+    public function Delete(): RedirectResponse
+    {
+        $user = request()->validate([
+            "id" => "required|string",
+        ]);
+        User::find($user->id)->delete();
+        return redirect("login");
+    }
+}
