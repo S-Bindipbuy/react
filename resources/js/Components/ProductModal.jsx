@@ -1,14 +1,26 @@
+import { useState } from "react";
 import { useForm } from "@inertiajs/react";
 
-const ProductModal = ({ Modal }) => {
-    const {data, setData, post} = useForm({
-        name: "",
-        price: "",
-        image: null,
-        description: "",
-        category_id: null,
-        qty: 1,
+const ProductModal = ({ Modal, Product, URL }) => {
+    const { data, setData, get } = useForm({
+        name: Product?.name || "",
+        price: Product?.price || "",
+        image: "",
+        description: Product?.description || "",
+        category_id: Product?.catgory_id || "",
+        qty: Product?.qty || 1,
     });
+
+    const input = (event) => {
+        const name = event.target.name;
+        const abc = event.target.value;
+        setData(name, abc);
+    };
+
+    const submit = (event) => {
+        event.preventDefault();
+        get(URL);
+    };
 
     return (
         <div>
@@ -26,6 +38,7 @@ const ProductModal = ({ Modal }) => {
                                             type="text"
                                             name="category_id"
                                             className="input input-neutral"
+                                            onChange={(event) => input(event)}
                                         />
                                     </td>
                                 </tr>
@@ -36,6 +49,7 @@ const ProductModal = ({ Modal }) => {
                                             type="text"
                                             name="name"
                                             className="input input-neutral"
+                                            onChange={(event) => input(event)}
                                         />
                                     </td>
                                 </tr>
@@ -46,6 +60,7 @@ const ProductModal = ({ Modal }) => {
                                             type="text"
                                             name="qty"
                                             className="input input-neutral"
+                                            onChange={(event) => input(event)}
                                         />
                                     </td>
                                 </tr>
@@ -56,7 +71,20 @@ const ProductModal = ({ Modal }) => {
                                             type="text"
                                             name="price"
                                             className="input input-neutral"
+                                            onChange={(event) => input(event)}
                                         />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Description</td>
+                                    <td>
+                                        <textarea
+                                            name="description"
+                                            className="textarea"
+                                            onChange={(event) => input(event)}
+                                        >
+                                            {data.description}
+                                        </textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -64,6 +92,7 @@ const ProductModal = ({ Modal }) => {
                                         <input
                                             type="submit"
                                             className="input input-neutral"
+                                            onChange={(event) => input(event)}
                                         />
                                     </td>
                                 </tr>

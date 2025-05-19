@@ -6,7 +6,7 @@ const Product = () => {
             <label htmlFor="ProductModal" className="btn m-5">
                 Add New
             </label>
-            <ProductModal />
+            <ProductModal URL="/end" />
         </div>
     );
 };
