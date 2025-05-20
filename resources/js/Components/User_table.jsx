@@ -1,8 +1,7 @@
 import { router, usePage } from "@inertiajs/react";
 
-const UserTable = () => {
-    const users = usePage().props.users;
-    const All_User = Array.isArray(users) ? users : [];
+const UserTable = (users) => {
+    const All_User = users.users || [];
     const user_delete = (event, id) => {
         event.preventDefault();
         router.post("/user_delete", { id });

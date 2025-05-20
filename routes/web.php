@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\Dashboard;
-use function GuzzleHttp\json_encode;
 
+Route::get("/users", [AdminController::class, "all"]);
 Route::get("/pos", [ProductController::class, "all"]);
 Route::get("/dashboard/product", [ProductController::class, "store"]);
 Route::middleware(Dashboard::class)->group(function () {
