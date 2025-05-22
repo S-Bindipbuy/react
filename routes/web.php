@@ -19,11 +19,6 @@ Route::post("Login", [UserController::class, "Login"]);
 Route::post("/ChangeTheme", [UserController::class, "Theme"]);
 Route::post("/user_delete", [UserController::class, "Delete"]);
 Route::post("/user_delete", [UserController::class, "Delete"]);
-
 Route::get("/product", function () {
     return inertia()->render("Product");
-});
-
-Route::get("/end", function () {
-    return dd(request()->all());
 });

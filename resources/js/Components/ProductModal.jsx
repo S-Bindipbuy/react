@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "@inertiajs/react";
 
 const ProductModal = ({ Modal, Product, URL }) => {
@@ -82,9 +81,8 @@ const ProductModal = ({ Modal, Product, URL }) => {
                                             name="description"
                                             className="textarea"
                                             onChange={(event) => input(event)}
-                                        >
-                                            {data.description}
-                                        </textarea>
+                                            value={data.description}
+                                        ></textarea>
                                     </td>
                                 </tr>
                                 <tr>
