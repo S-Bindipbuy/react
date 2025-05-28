@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Card from "./Card";
 
-function POSRight({ addcart, Products, Categorys }) {
+function POSRight({ addcart, Products, Categories }) {
     const productList = Products ? Products : [];
-    const categoryList = Categorys ? Categorys : [];
+    const categoryList = Category ? Category : [];
     const [category, setCategory] = useState("All");
     const filter = (category) => {
         setCategory(category.target.value);
@@ -41,7 +41,8 @@ function POSRight({ addcart, Products, Categorys }) {
                 {productList
                     .filter(
                         (Product) =>
-                            Product.category === category || category === "All",
+                            Product.category.name === category ||
+                            category === "All",
                     )
                     .map((Product) => {
                         return (

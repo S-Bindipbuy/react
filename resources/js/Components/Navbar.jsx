@@ -3,7 +3,7 @@ import { usePage, router } from "@inertiajs/react";
 
 const Navbar = () => {
     const Page = usePage().props;
-    const Setting = Page.auth?.user?.themes || {};
+    const Setting = Page.auth?.admin?.themes || {};
     const select = usePage().props.theme || [];
     const [Theme, setTheme] = useState(Setting.name || "default");
 
