@@ -21,10 +21,12 @@ export default function Dashboard() {
         }
     };
     const Products = usePage().props.Products || [];
+    const Categories = usePage().props.Categories || [];
     return (
         <div className="flex h-svh">
             <POSLeft addtocart={addtocart} removecart={removecart} />
-            <POSRight addcart={addcart} Products={Products} />
+            <POSRight addcart={addcart} Products={Products} Categories={Categories} />
         </div>
+
     );
 }

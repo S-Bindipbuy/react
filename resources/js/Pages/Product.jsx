@@ -4,13 +4,25 @@ import { useState, useEffect } from "react";
 import { usePage } from "@inertiajs/react";
 
 const Product = () => {
-    const products = usePage().props.products || [];
+    const products = usePage().props.Products || [];
+    const categories = usePage().props.categories || [];
+   
+    const [URL, setURL] = useState();
+    const [Add, setAdd]= useState(true);
+
+
+
     const [product, setProduct] = useState({});
     const add = (event) => {
+
         setProduct({});
+        setAdd(true);
+        setURL("/api/insert");
     };
     const update = (event) => {
         setProduct(event.target.value);
+        setAdd(false);
+        setURL("/api/update");
     };
     return (
         <div>
@@ -22,7 +34,8 @@ const Product = () => {
                 Add New
             </label>
             <ProductTable products={products} />
-            <ProductModal URL="/end" />
+            <ProductModal URL= {URL} Add = {Add} Categories={categories} />
+
         </div>
     );
 };

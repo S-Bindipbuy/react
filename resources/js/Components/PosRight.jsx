@@ -3,7 +3,7 @@ import Card from "./Card";
 
 function POSRight({ addcart, Products, Categories }) {
     const productList = Products ? Products : [];
-    const categoryList = Category ? Category : [];
+    const categoryList = Categories ? Categories : [];
     const [category, setCategory] = useState("All");
     const filter = (category) => {
         setCategory(category.target.value);

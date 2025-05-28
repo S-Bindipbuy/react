@@ -19,6 +19,7 @@ const ProductTable = ({ products }) => {
                             <th>Price</th>
                             <th>Description</th>
                             <th>Qty</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,9 +31,10 @@ const ProductTable = ({ products }) => {
                                             <input
                                                 type="checkbox"
                                                 className="checkbox"
-                                            />
+                                                />
                                         </label>
                                     </th>
+                                                <td>{data.id}</td>
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
@@ -51,7 +53,9 @@ const ProductTable = ({ products }) => {
                                         </div>
                                     </td>
                                     <td>{data.category.name}</td>
+                                    <td>{data.price}</td>
                                     <td>{data.description}</td>
+                                    <td>{data.qty}</td>
                                     <th>
                                         <button className="btn btn-ghost btn-xs">
                                             details

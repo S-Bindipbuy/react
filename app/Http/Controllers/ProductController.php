@@ -19,7 +19,21 @@ class ProductController extends Controller
     public function store()
     {
         return inertia()->render("Product", [
-            "Products" => Product::with("category"),
+            "Products" => Product::with("category")->get(),
+            "categories" => Category::all(),
         ]);
     }
+    public function Insert()
+    {
+        if( Product::create(request()->except([
+            '_token','id'
+        ]))){
+
+                return redirect()->back()->with('success', 'User created successfully!');
+
+            }
+        return response()->json(['error' => 'Failed to create user'], 500);
+    }
 }
+
+

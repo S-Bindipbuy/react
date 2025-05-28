@@ -1,24 +1,34 @@
 import { useForm } from "@inertiajs/react";
 
-const ProductModal = ({ Modal, Product, URL }) => {
-    const { data, setData, get } = useForm({
+const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
+    const { data, setData, post } = useForm({
         name: Product?.name || "",
         price: Product?.price || "",
         image: "",
         description: Product?.description || "",
-        category_id: Product?.catgory_id || "",
+        category_id: Product?.catgory_id || 1,
         qty: Product?.qty || 1,
-    });
+        image:"",
 
+
+    });
     const input = (event) => {
         const name = event.target.name;
         const abc = event.target.value;
         setData(name, abc);
+
     };
 
     const submit = (event) => {
         event.preventDefault();
-        get(URL);
+       post(URL, {  onSuccess: () => {
+        window.location.reload();
+          },
+          onError: (errors) => {
+            alert(errors.error || "Something went wrong!");
+          }
+        });
+        document.getElementById("ProductModal").click();
     };
 
     return (
@@ -30,17 +40,19 @@ const ProductModal = ({ Modal, Product, URL }) => {
                     <form onSubmit={(event) => submit(event)}>
                         <table className="table">
                             <tbody>
-                                <tr>
-                                    <td>Category ID</td>
-                                    <td>
-                                        <input
-                                            type="text"
-                                            name="category_id"
-                                            className="input input-neutral"
-                                            onChange={(event) => input(event)}
-                                        />
-                                    </td>
-                                </tr>
+                                {
+                                    !Add && ( <tr>
+                                        <td>Category ID</td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                name="category_id"
+                                                className="input input-neutral"
+                                                onChange={(event) => input(event)}
+                                            />
+                                        </td>
+                                    </tr>)
+                                }
                                 <tr>
                                     <td>Name</td>
                                     <td>
@@ -50,6 +62,28 @@ const ProductModal = ({ Modal, Product, URL }) => {
                                             className="input input-neutral"
                                             onChange={(event) => input(event)}
                                         />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Category</td>
+                                    <td>
+                                        <select
+                                            type="text"
+                                            name="category_id"
+                                            defaultValue={Categories[0].id}
+                                            className="input input-neutral"
+                                            onChange={(event) => input(event)}
+                                        >
+                                            {
+                                                Categories.map(Category=>{
+                                            return <option value={Category.id}>
+                                                {Category.name}
+                                            </option>
+                                                })
+                                            }
+                                            </select>
+
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -85,6 +119,20 @@ const ProductModal = ({ Modal, Product, URL }) => {
                                         ></textarea>
                                     </td>
                                 </tr>
+
+                                <tr>
+                                    <td>Image</td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            name="image"
+                                            className="input input-neutral"
+                                            onChange={(event) => input(event)}
+                                        />
+                                    </td>
+                                </tr>
+
+
                                 <tr>
                                     <td>
                                         <input

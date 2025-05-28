@@ -13,8 +13,8 @@ return new class extends Migration {
             $table->foreignIdFor(App\Models\Category::class);
             $table->integer("qty");
             $table->float("price");
-            $table->float("image");
-            $table->float("description");
+            $table->string("image");
+            $table->string("description");
             $table->timestamps();
         });
     }
