@@ -1,7 +1,7 @@
 import AddtoCard from "./AddtoCard";
 function POSLeft({ addtocart = [], removecart }) {
     return (
-        <div className="grid-cols-1 p-[10px] bg-yellow-50 w-full overflow-scroll">
+        <div className="grid-cols-1 p-[10px] w-full overflow-scroll">
             {addtocart.map((card) => {
                 return (
                     <AddtoCard

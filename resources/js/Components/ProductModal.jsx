@@ -76,9 +76,9 @@ const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
                                         >
                                             {
                                                 Categories.map(Category=>{
-                                            return <option value={Category.id}>
-                                                {Category.name}
-                                            </option>
+                                                    return <option value={Category.id}>
+                                                        {Category.name}
+                                                    </option>
                                                 })
                                             }
                                             </select>
