@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -21,3 +22,9 @@ Route::post("/ChangeTheme", [AdminController::class, "Theme"]);
 Route::post("/user_delete", [UserController::class, "Delete"]);
 Route::post("/user_delete", [UserController::class, "Delete"]);
 Route::get("/product", [ProductController::class, "store"]);
+
+
+
+
+//Route for invoice
+Route::get("/invoice", [InvoiceController::class, "Invoice"]);

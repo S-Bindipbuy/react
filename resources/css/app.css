@@ -22,3 +22,111 @@
     --color-cpc-base: #1e1e2e;
     --color-custom-white: #d9d9d9;
 }
+
+
+
+
+
+
+
+
+
+
+/* Invoice.css */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+.app-wrapper {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.main-title {
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 30px;
+}
+
+.invoice-title {
+  margin-bottom: 20px;
+  color: #495057;
+  text-align: center;
+}
+
+.layout {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.table-section,
+.detail-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.invoice-table th,
+.invoice-table td {
+  border: 1px solid #dee2e6;
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.invoice-table th {
+  background-color: #f1f3f5;
+  color: #212529;
+}
+
+.invoice-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.invoice-table tr:hover {
+  background-color: #e9ecef;
+  cursor: pointer;
+}
+
+.invoice-detail {
+  background: #fefefe;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.invoice-content p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.print-button {
+  display: block;
+  margin: 30px auto 0;
+  padding: 12px 24px;
+  background-color: #198754;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.print-button:hover {
+  background-color: #157347;
+}
+
