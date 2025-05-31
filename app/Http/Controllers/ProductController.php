@@ -34,6 +34,13 @@ class ProductController extends Controller
             }
         return response()->json(['error' => 'Failed to create user'], 500);
     }
+
+    public function Delete(){
+
+        $id = request()->id;
+        Product::find($id)->delete();
+        return redirect("product");
+    }
 }
 
 

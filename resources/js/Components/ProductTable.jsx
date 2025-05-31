@@ -1,7 +1,13 @@
-const ProductTable = ({ products }) => {
+import { router } from "@inertiajs/react";
+
+const ProductTable = ({ products,URL }) => {
+    const deletepro = (event, id) =>{
+        event.preventDefault();
+        router.post(URL, {id: id});
+    }
     return (
         <div>
-            <div className="overflow-x-auto">
+            <div className="overflow">
                 <table className="table">
                     <thead>
                         <tr>
@@ -59,6 +65,9 @@ const ProductTable = ({ products }) => {
                                     <th>
                                         <button className="btn btn-ghost btn-xs">
                                             details
+                                        </button>
+                                        <button className="btn btn-ghost btn-xs" onClick={(event)=>deletepro(event, data.id)}>
+                                            delete
                                         </button>
                                     </th>
                                 </tr>

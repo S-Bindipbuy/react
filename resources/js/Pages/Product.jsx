@@ -6,7 +6,7 @@ import { usePage } from "@inertiajs/react";
 const Product = () => {
     const products = usePage().props.Products || [];
     const categories = usePage().props.categories || [];
-   
+
     const [URL, setURL] = useState();
     const [Add, setAdd]= useState(true);
 
@@ -33,7 +33,7 @@ const Product = () => {
             >
                 Add New
             </label>
-            <ProductTable products={products} />
+            <ProductTable products={products} URL= "api/delete"/>
             <ProductModal URL= {URL} Add = {Add} Categories={categories} />
 
         </div>
