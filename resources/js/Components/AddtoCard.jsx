@@ -1,12 +1,12 @@
 import { useState } from "react";
-const AddtoCard = ({ removecart, id, name, price, image, updateqty }) => {
+const AddtoCard = ({ removecart, id, name, price, image, setUpdateqty }) => {
     const [qty, setqty] = useState(1);
     const add = () => {
-        updateqty = true;
+        setUpdateqty(true);
         setqty((qty) => qty + 1);
     };
     const remove = () => {
-        updateqty = true;
+        setUpdateqty(true);
         if (qty > 0) {
             setqty((qty) => qty - 1);
         }
@@ -36,19 +36,19 @@ const AddtoCard = ({ removecart, id, name, price, image, updateqty }) => {
                     </div>
                     <button
                         className="btn btn-square btn-ghost"
-                        onClick={() => setqty(qty + 1)}
+                        onClick={() => add()}
                     >
                         +
                     </button>
                     <button
                         className="btn btn-square btn-ghost"
-                        onClick={() => add()}
+                        onClick={() => remove()}
                     >
                         -
                     </button>
                     <button
                         className="btn btn-circle btn-ghost"
-                        onClick={() => remove()}
+                        onClick={() => removecart(id)}
                     >
                         x
                     </button>
