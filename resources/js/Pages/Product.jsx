@@ -8,13 +8,10 @@ const Product = () => {
     const categories = usePage().props.categories || [];
 
     const [URL, setURL] = useState();
-    const [Add, setAdd]= useState(true);
-
-
+    const [Add, setAdd] = useState(true);
 
     const [product, setProduct] = useState({});
     const add = (event) => {
-
         setProduct({});
         setAdd(true);
         setURL("/api/insert");
@@ -33,9 +30,8 @@ const Product = () => {
             >
                 Add New
             </label>
-            <ProductTable products={products} URL= "api/delete"/>
-            <ProductModal URL= {URL} Add = {Add} Categories={categories} />
-
+            <ProductTable products={products} URL="api/delete" />
+            <ProductModal URL={URL} Add={Add} Categories={categories} />
         </div>
     );
 };

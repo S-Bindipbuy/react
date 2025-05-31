@@ -1,6 +1,16 @@
 import { useState } from "react";
-const AddtoCard = ({ removecart, id, name, price, image }) => {
+const AddtoCard = ({ removecart, id, name, price, image, updateqty }) => {
     const [qty, setqty] = useState(1);
+    const add = () => {
+        updateqty = true;
+        setqty((qty) => qty + 1);
+    };
+    const remove = () => {
+        updateqty = true;
+        if (qty > 0) {
+            setqty((qty) => qty - 1);
+        }
+    };
     return (
         <div className="m-4">
             <ul className="list bg-base-100 rounded-box shadow-md">
@@ -32,13 +42,13 @@ const AddtoCard = ({ removecart, id, name, price, image }) => {
                     </button>
                     <button
                         className="btn btn-square btn-ghost"
-                        onClick={() => setqty(qty - 1)}
+                        onClick={() => add()}
                     >
                         -
                     </button>
                     <button
                         className="btn btn-circle btn-ghost"
-                        onClick={() => removecart(id)}
+                        onClick={() => remove()}
                     >
                         x
                     </button>
