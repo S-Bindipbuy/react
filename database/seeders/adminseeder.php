@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Admin;
 use Carbon\Carbon;
-
 
 class adminseeder extends Seeder
 {
@@ -15,19 +15,16 @@ class adminseeder extends Seeder
      */
     public function run(): void
     {
-         Admin::insert(
+        Admin::insert([
             [
-                [
-                    "name" => "admin",
-                    "email" => "admin.example.com",
-                    "password" => bcrypt("admin123"),
-                    "image" => "abc.jpg",
-                    "themes_id" => "1",
-                    "created_at" => Carbon::now(),
-                    "updated_at" => Carbon::now(),
-                ],
-
-            ]
-        );
+                "name" => "admin",
+                "email" => "admin@example.com",
+                "password" => Hash::make("admin123"),
+                "image" => "abc.jpg",
+                "themes_id" => "1",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now(),
+            ],
+        ]);
     }
 }
