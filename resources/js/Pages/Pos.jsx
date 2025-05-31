@@ -25,8 +25,11 @@ export default function Dashboard() {
     return (
         <div className="flex h-svh">
             <POSLeft addtocart={addtocart} removecart={removecart} />
-            <POSRight addcart={addcart} Products={Products} Categories={Categories} />
+            <POSRight
+                addcart={addcart}
+                Products={Products}
+                Categories={Categories}
+            />
         </div>
-
     );
 }
