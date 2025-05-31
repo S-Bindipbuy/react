@@ -8,7 +8,6 @@ const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
         description: Product?.description || "",
         category_id: Product?.catgory_id || 1,
         qty: Product?.qty || 1,
-        image:"",
 
 
     });
