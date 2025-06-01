@@ -1,13 +1,21 @@
 import AddtoCard from "./AddtoCard";
 import Totalprice from "./Totalprice";
 import { useState, useEffect } from "react";
+
 function POSLeft({ addtocart = [], removecart }) {
+    const [total, setTotal] = useState(0);
+
     useEffect(() => {
+        const totalPrice = addtocart.reduce((acc, card) => {
+            return acc + card.price ;
+        }, 0);
+        setTotal(totalPrice);
 
     }, [addtocart]);
     return (
         <>
-            <div className="grid-cols-1 p-[10px] w-full overflow-scroll">
+            <div className="grid-row-2 grid p-[10px] w-full">
+                <div className="w-full max-h-[80vh] overflow-y-auto bg-white shadow-md">
                 {addtocart.map((card) => {
                     return (
                         <AddtoCard
@@ -18,11 +26,13 @@ function POSLeft({ addtocart = [], removecart }) {
                             image={card.image}
                             removecart={removecart}
                             setTotal={setTotal}
+                            settotal= {setTotal}
                         />
                     );
                 })}
-            </div>
+                </div>
             <Totalprice Total={total} />
+            </div>
         </>
     );
 }

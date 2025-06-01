@@ -1,58 +1,49 @@
-import { useState, useEffect } from "react";
-import { usePage, router } from "@inertiajs/react";
-
-const Navbar = () => {
-    const Page = usePage().props;
-    const Setting = Page.auth?.admin?.themes || {};
-    const select = usePage().props.theme || [];
-    const [Theme, setTheme] = useState(Setting.name || "default");
-
-    useEffect(() => {
-        document.documentElement.setAttribute("data-theme", Theme);
-    }, [Theme]);
-
-    const handleThemeChange = (event) => {
-        router.post("/ChangeTheme", { themes: event.target.id });
-        setTheme(event.target.value);
-    };
-
+function Navbar() {
     return (
-        <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn m-1">
-                Theme Changer
-                <svg
-                    width="12px"
-                    height="12px"
-                    className="inline-block h-2 w-2 fill-current opacity-60"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 2048 2048"
-                >
-                    <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
-                </svg>
+        <div className="navbar bg-base-100 shadow-sm">
+            <div className="flex-1">
+                <a className="btn btn-ghost text-xl">daisyUI</a>
             </div>
-            <ul
-                tabIndex={0}
-                className="dropdown-content bg-base-300 rounded-box z-1 w-52 p-2 shadow-2xl"
-                onChange={(e) => handleThemeChange(e)}
-            >
-                <li>
-                    {select.map((theme) => {
-                        return (
-                            <input
-                                type="radio"
-                                name="theme-dropdown"
-                                className="btn btn-sm btn-block btn-ghost justify-start"
-                                aria-label={theme.name}
-                                value={theme.name}
-                                key={theme.id}
-                                id={theme.id}
+            <div className="flex gap-2">
+                <input
+                    type="text"
+                    placeholder="Search"
+                    className="input input-bordered w-24 md:w-auto"
+                />
+                <div className="dropdown dropdown-end">
+                    <div
+                        tabIndex={0}
+                        role="button"
+                        className="btn btn-ghost btn-circle avatar"
+                    >
+                        <div className="w-10 rounded-full">
+                            <img
+                                alt="Tailwind CSS Navbar component"
+                                src="virakcute.jpg"
                             />
-                        );
-                    })}
-                </li>
-            </ul>
+                        </div>
+                    </div>
+                    <ul
+                        tabIndex={0}
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                    >
+                        <li>
+                            <a className="justify-between">
+                                Profile
+                                <span className="badge">New</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>Settings</a>
+                        </li>
+                        <li>
+                            <a>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     );
-};
+}
 
 export default Navbar;

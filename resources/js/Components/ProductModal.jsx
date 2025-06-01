@@ -8,24 +8,22 @@ const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
         description: Product?.description || "",
         category_id: Product?.catgory_id || 1,
         qty: Product?.qty || 1,
-
-
     });
     const input = (event) => {
         const name = event.target.name;
         const abc = event.target.value;
         setData(name, abc);
-
     };
 
     const submit = (event) => {
         event.preventDefault();
-        post(URL, {  onSuccess: () => {
-            window.location.reload();
-        },
+        post(URL, {
+            onSuccess: () => {
+                window.location.reload();
+            },
             onError: (errors) => {
                 alert(errors.error || "Something went wrong!");
-            }
+            },
         });
         document.getElementById("ProductModal").click();
     };
@@ -39,19 +37,21 @@ const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
                     <form onSubmit={(event) => submit(event)}>
                         <table className="table">
                             <tbody>
-                                {
-                                    !Add && ( <tr>
+                                {!Add && (
+                                    <tr>
                                         <td>Category ID</td>
                                         <td>
                                             <input
                                                 type="text"
                                                 name="category_id"
                                                 className="input input-neutral"
-                                                onChange={(event) => input(event)}
+                                                onChange={(event) =>
+                                                    input(event)
+                                                }
                                             />
                                         </td>
-                                    </tr>)
-                                }
+                                    </tr>
+                                )}
                                 <tr>
                                     <td>Name</td>
                                     <td>
@@ -73,16 +73,14 @@ const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
                                             className="input input-neutral"
                                             onChange={(event) => input(event)}
                                         >
-                                            {
-                                                Categories.map(Category=>{
-                                                    return <option value={Category.id}>
+                                            {Categories.map((Category) => {
+                                                return (
+                                                    <option value={Category.id}>
                                                         {Category.name}
                                                     </option>
-                                                })
-                                            }
-                                            </select>
-
-
+                                                );
+                                            })}
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
@@ -130,7 +128,6 @@ const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
                                         />
                                     </td>
                                 </tr>
-
 
                                 <tr>
                                     <td>

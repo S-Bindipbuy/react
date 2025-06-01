@@ -1,12 +1,14 @@
 import { useState } from "react";
-const AddtoCard = ({ removecart, id, name, price, image }) => {
+const AddtoCard = ({ removecart, id, name, price, image, settotal}) => {
     const [qty, setqty] = useState(1);
     const add = () => {
         setqty((qty) => qty + 1);
+        settotal((total) => total + price);
     };
     const remove = () => {
         if (qty > 1) {
             setqty((qty) => qty - 1);
+              settotal((total) => total - price);
         }
     };
     return (
@@ -30,7 +32,7 @@ const AddtoCard = ({ removecart, id, name, price, image }) => {
                         </div>
                     </div>
                     <div className="text-xs uppercase font-semibold opacity-60">
-                        Pay: {qty * price} $
+                        Pay: {(qty * price).toFixed(2)} $
                     </div>
                     <button
                         className="btn btn-square btn-ghost"

@@ -62,4 +62,22 @@ class UserController extends Controller
         User::find($user->id)->delete();
         return redirect("login");
     }
+
+
+    public function InsertUser()
+
+    {
+        $user = request() ->validate([
+            "name" => "required|string",
+            "email" => "required|email",
+            "password" => "required|min:8",
+
+
+        ]);
+
+        $user['image'] = "abc.png";
+        $user['themes_id'] ='1';
+        User::create($user);
+
+    }
 }
