@@ -1,10 +1,19 @@
 import POSLeft from "../Components/PosLeft";
 import POSRight from "../Components/PosRight";
-import { usePage } from "@inertiajs/react";
+import { usePage,router } from "@inertiajs/react";
 import { useState } from "react";
 export default function Dashboard() {
     const [addtocart, setadd] = useState([]);
+      const checkout = () => {
+        if (addtocart.length > 0) {
+            const user = usePage().props.auth.admin || {};
+            console.log("Checkout initiated with user:", user);
+            router.post("/api/checkout", { addtocart, user });
 
+        } else {
+            alert("Please add items to the cart before checking out.");
+        }
+  }
     const modifycart = (cart, qty) => {
         setadd(
             addtocart.map((product) => {
@@ -42,6 +51,7 @@ export default function Dashboard() {
                 addtocart={addtocart}
                 removecart={removecart}
                 modifycart={modifycart}
+                checkout={checkout}
             />
             <POSRight
                 addcart={addcart}

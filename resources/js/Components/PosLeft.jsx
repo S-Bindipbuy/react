@@ -2,7 +2,7 @@ import AddtoCard from "./AddtoCard";
 import Totalprice from "./Totalprice";
 import { useState, useEffect } from "react";
 
-function POSLeft({ addtocart = [], removecart, modifycart }) {
+function POSLeft({ addtocart = [], removecart, modifycart, checkout }) {
     const [total, setTotal] = useState(0);
 
     useEffect(() => {
@@ -29,7 +29,7 @@ function POSLeft({ addtocart = [], removecart, modifycart }) {
                         );
                     })}
                 </div>
-                <Totalprice Total={total} />
+                <Totalprice Total={total} checkout={checkout}/>
             </div>
         </>
     );

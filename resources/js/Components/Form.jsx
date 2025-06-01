@@ -12,7 +12,7 @@ const Form = ({ url }) => {
     return (
         <form onSubmit={(form) => Submit(form)}>
             <fieldset className="fieldset">
-                <legend className="fieldset-legend">Email</legend>
+                <legend className="fieldset-legend ">Email</legend>
                 <input
                     type="text"
                     name="email"
