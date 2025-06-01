@@ -2,7 +2,7 @@ function Navbar() {
     return (
         <div className="navbar bg-base-100 shadow-sm">
             <div className="flex-1">
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <a className="btn btn-ghost text-xl">Kitty</a>
             </div>
             <div className="flex gap-2">
                 <input
@@ -17,10 +17,7 @@ function Navbar() {
                         className="btn btn-ghost btn-circle avatar"
                     >
                         <div className="w-10 rounded-full">
-                            <img
-                                alt="Tailwind CSS Navbar component"
-                                src="virakcute.jpg"
-                            />
+                            <img alt="profile" src="cute.jpg" />
                         </div>
                     </div>
                     <ul

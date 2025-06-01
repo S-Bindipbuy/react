@@ -20,7 +20,7 @@ class adminseeder extends Seeder
                 "name" => "admin",
                 "email" => "admin@example.com",
                 "password" => Hash::make("admin123"),
-                "image" => "abc.jpg",
+                "image" => "cute.jpg",
                 "themes_id" => "1",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now(),
