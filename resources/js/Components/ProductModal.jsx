@@ -20,12 +20,12 @@ const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
 
     const submit = (event) => {
         event.preventDefault();
-       post(URL, {  onSuccess: () => {
-        window.location.reload();
-          },
-          onError: (errors) => {
-            alert(errors.error || "Something went wrong!");
-          }
+        post(URL, {  onSuccess: () => {
+            window.location.reload();
+        },
+            onError: (errors) => {
+                alert(errors.error || "Something went wrong!");
+            }
         });
         document.getElementById("ProductModal").click();
     };

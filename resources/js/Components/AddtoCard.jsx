@@ -1,13 +1,11 @@
 import { useState } from "react";
-const AddtoCard = ({ removecart, id, name, price, image, setUpdateqty }) => {
+const AddtoCard = ({ removecart, id, name, price, image }) => {
     const [qty, setqty] = useState(1);
     const add = () => {
-        setUpdateqty(true);
         setqty((qty) => qty + 1);
     };
     const remove = () => {
-        setUpdateqty(true);
-        if (qty > 0) {
+        if (qty > 1) {
             setqty((qty) => qty - 1);
         }
     };

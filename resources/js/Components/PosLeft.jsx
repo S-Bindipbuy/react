@@ -1,8 +1,10 @@
-import { useState } from "react";
 import AddtoCard from "./AddtoCard";
 import Totalprice from "./Totalprice";
+import { useState, useEffect } from "react";
 function POSLeft({ addtocart = [], removecart }) {
-    const [updateqty, setUpdateqty] = useState(false);
+    useEffect(() => {
+
+    }, [addtocart]);
     return (
         <>
             <div className="grid-cols-1 p-[10px] w-full overflow-scroll">
@@ -14,13 +16,13 @@ function POSLeft({ addtocart = [], removecart }) {
                             name={card.name}
                             price={card.price}
                             image={card.image}
-                            setUpdateqty={setUpdateqty}
                             removecart={removecart}
+                            setTotal={setTotal}
                         />
                     );
                 })}
             </div>
-            <Totalprice product={addtocart} setUpdateqty={setUpdateqty} />
+            <Totalprice Total={total} />
         </>
     );
 }

@@ -17,7 +17,7 @@ export default function Dashboard() {
                 return cart.id == card.id;
             })
         ) {
-            setadd([...addtocart, card]);
+            setadd([...addtocart, {...card, order: 1}]);
         }
     };
     const Products = usePage().props.Products || [];
