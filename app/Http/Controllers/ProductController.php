@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Inertia\Response;
-// use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -25,22 +24,18 @@ class ProductController extends Controller
     }
     public function Insert()
     {
-        if( Product::create(request()->except([
-            '_token','id'
-        ]))){
-
-                return redirect()->back()->with('success', 'User created successfully!');
-
-            }
-        return response()->json(['error' => 'Failed to create user'], 500);
+        if (Product::create(request()->except(["_token", "id"]))) {
+            return redirect()
+                ->back()
+                ->with("success", "User created successfully!");
+        }
+        return response()->json(["error" => "Failed to create user"], 500);
     }
 
-    public function Delete(){
-
+    public function Delete()
+    {
         $id = request()->id;
         Product::find($id)->delete();
         return redirect("product");
     }
 }
-
-

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -63,22 +64,17 @@ class UserController extends Controller
         return redirect("login");
     }
 
-
     public function InsertUser()
-
     {
-        $user = request() ->validate([
-            "name" => "required|string",
+        $user = request()->validate([
+            "name" => "required",
             "email" => "required|email",
+            "image" => "required",
             "password" => "required|min:8",
-
-
+            "themes_id" => "required",
         ]);
+        $newuser = User::create($user);
 
-        $user['image'] = "abc.png";
-        $user['themes_id'] ='1';
-        User::create($user);
-
+        return response()->json(["status" => "1", $newuser]);
     }
-  
 }

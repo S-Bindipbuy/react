@@ -5,7 +5,7 @@ use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
-class productseeder extends Seeder
+class ProductSeeder extends Seeder
 {
     /**
      * Run the database seeds.

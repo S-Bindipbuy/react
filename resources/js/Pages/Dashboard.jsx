@@ -4,17 +4,13 @@ import { usePage } from "@inertiajs/react";
 import UserModal from "../Components/Usermodal";
 import Sidebar from "../Components/Sidebar";
 
-function insertUser(event) {
-    document.getElementById('UserModal').click();
-}
 function Dashboard() {
     const users = usePage().props.users || [];
     return (
         <>
-            <Navbar/>
-            <UserModal/>
-            <Sidebar/>
-            <button onClick={(event)=>insertUser(event)} className="btn btn-primary my-5 btn-outline ml-5">Insert User</button>
+            <Navbar />
+            <UserModal />
+            <Sidebar />
             <UserTable users={users} />
         </>
     );

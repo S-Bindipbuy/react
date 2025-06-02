@@ -1,121 +1,112 @@
-import { useForm, usePage } from "@inertiajs/react";
-import React from "react";
-
+import axios from "axios";
+import { useState } from "react";
 
 function UserModal() {
-    const { errors}  = usePage().props;
-
-    const { data, setData, post } = useForm({
-      name: "",
-      email: "",
-      password: "",
-      image: "",
-
+    const [errors, seterror] = useState([]);
+    const [data, setData] = useState({
+        name: "",
+        email: "",
+        password: "",
+        image: "",
+        themes_id: 1,
     });
 
-  const submit = (event) => {
-    event.preventDefault();
-    post("/api/insert/user", {
-      onSuccess: () => {
-        window.location.reload();
-      },
-      onError: (errors) => {
-        alert(errors.error || "Something went wrong!");
-      },
-    });
+    const submit = async (event) => {
+        event.preventDefault();
+        axios
+            .post("http://localhost:8000/api/insert/user", data)
+            .then((response) => {
+                alert(response.data.status);
+                seterror({});
+            })
+            .catch((error) => {
+                seterror(error.response.data.errors);
+                console.error(error);
+            });
+    };
 
-  };
+    const input = (event) => {
+        console.log(data);
+        const name = event.target.name;
+        const value = event.target.value;
+        setData((prevdata) => ({ ...prevdata, [name]: value }));
+    };
 
-  const input = (event) => {
+    return (
+        <div>
+            <input type="checkbox" id="UserModal" className="modal-toggle" />
+            <div className="modal" role="dialog">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">User Form</h3>
 
-    const name = event.target.name;
-    const value = event.target.value;
-    setData(name, value);
-  };
-  return (
-    <div>
-      <input type="checkbox" id="UserModal" className="modal-toggle" />
-      <div className="modal" role="dialog">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">User Form</h3>
+                    <form onSubmit={submit}>
+                        <table className="table">
+                            <tbody>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            className={`input input-bordered w-full ${errors.name ? "input-error" : ""}`}
+                                            onChange={input}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            className={`input input-bordered w-full ${errors.email ? "input-error" : ""}`}
+                                            onChange={input}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Password</td>
+                                    <td>
+                                        <input
+                                            type="password"
+                                            name="password"
+                                            className={`input input-bordered w-full ${errors.password ? "input-error" : ""}`}
+                                            onChange={input}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Image URL</td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            name="image"
+                                            className={`input input-bordered w-full ${errors.image ? "input-error" : ""}`}
+                                            onChange={input}
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-          <form onSubmit={submit}>
-            <table className="table">
-              <tbody>
-                  {errors.name && (
-                        <td>{errors.name}</td>
-                    )}
-                <tr>
-                  <td>Name</td>
-                  <td>
-                    <input
-                      type="text"
-                      name="name"
-                      className="input input-bordered w-full"
-                      onChange={input}
-                    />
-                  </td>
-                    {errors.email && (
-                        <td>{errors.email}</td>
-                    )}
+                        <div className="mt-4 text-right">
+                            <input
+                                value="Submit"
+                                type="submit"
+                                className="btn btn-outline"
+                            />
+                        </div>
+                    </form>
 
-                </tr>
-                <tr>
-                  <td>Email</td>
-                  <td>
-                    <input
-                      type="email"
-                      name="email"
-                      className="input input-bordered w-full"
-                      onChange={input}
-                    />
-                  </td>
-                </tr>
-                  {errors.password && (
-                        <td>{errors.password}</td>
-                    )}
-                <tr>
-                  <td>Password</td>
-                  <td>
-                    <input
-                      type="password"
-                      name="password"
-                      className="input input-bordered w-full"
-                      onChange={input}
-                    />
-                  </td>
-                </tr>
-                  {errors.image && (
-                        <td>{errors.image}</td>
-                    )}
-                <tr>
-                  <td>Image URL</td>
-                  <td>
-                    <input
-                      type="text"
-                      name="image"
-                      className="input input-bordered w-full"
-                      onChange={input}
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div className="mt-4 text-right">
-              <input type="submit" value="Submit" className="btn btn-primary" />
+                    <div className="modal-action">
+                        <label htmlFor="UserModal" className="btn">
+                            Close
+                        </label>
+                    </div>
+                </div>
             </div>
-          </form>
-
-          <div className="modal-action">
-            <label htmlFor="UserModal" className="btn">
-              Close
-            </label>
-          </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default UserModal;

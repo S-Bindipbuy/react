@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Admin;
 use Carbon\Carbon;
 
-class adminseeder extends Seeder
+class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
