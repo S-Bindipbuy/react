@@ -79,9 +79,9 @@ function UserModal() {
                                     <td>Image URL</td>
                                     <td>
                                         <input
-                                            type="text"
+                                            type="file"
                                             name="image"
-                                            className={`input input-bordered w-full ${errors.image ? "input-error" : ""}`}
+                                            className={`input input-bordered w-full ${errors.image ? "input-error" : ""} file-input file-input-secondary`}
                                             onChange={input}
                                         />
                                     </td>

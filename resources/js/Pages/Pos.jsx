@@ -1,13 +1,18 @@
 import POSLeft from "../Components/PosLeft";
 import POSRight from "../Components/PosRight";
-import { usePage,router } from "@inertiajs/react";
 import { useState } from "react";
-export default function Dashboard() {
+import { usePage,router } from "@inertiajs/react";
+import Layout from "./Layouts/Layout";
+export default function Pos() {
     const [addtocart, setadd] = useState([]);
-      const checkout = () => {
-        if (addtocart.length > 0) {
-            const user = usePage().props.auth.admin || {};
-            console.log("Checkout initiated with user:", user);
+    const user = usePage().props.auth?.admin || {};
+    const checkout = () => {
+
+          if (addtocart.length > 0) {
+            setadd([]);
+            //   console.log("User data:", user);
+            // console.log("Checkout initiated with user:", user);
+            // console.log(addtocart);
             router.post("/api/checkout", { addtocart, user });
 
         } else {
@@ -46,7 +51,8 @@ export default function Dashboard() {
     const Products = usePage().props.Products || [];
     const Categories = usePage().props.Categories || [];
     return (
-        <div className="flex h-svh">
+      <Layout>
+          <div className="flex h-svh">
             <POSLeft
                 addtocart={addtocart}
                 removecart={removecart}
@@ -59,5 +65,7 @@ export default function Dashboard() {
                 Categories={Categories}
             />
         </div>
+      </Layout>
     );
 }
+

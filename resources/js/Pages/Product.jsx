@@ -2,6 +2,7 @@ import ProductTable from "../Components/ProductTable";
 import ProductModal from "../Components/ProductModal";
 import { useState, useEffect } from "react";
 import { usePage } from "@inertiajs/react";
+import Layout from "./Layouts/Layout";
 
 const Product = () => {
     const products = usePage().props.Products || [];
@@ -22,7 +23,9 @@ const Product = () => {
         setURL("/api/update");
     };
     return (
-        <div>
+        <Layout title="Products">
+            
+            <div>
             <label
                 htmlFor="ProductModal"
                 className="btn m-5"
@@ -33,6 +36,7 @@ const Product = () => {
             <ProductTable products={products} URL="api/delete" />
             <ProductModal URL={URL} Add={Add} Categories={categories} />
         </div>
+        </Layout>
     );
 };
 

@@ -18,21 +18,22 @@ class InvoiceController extends Controller
     }
     public function Checkout(Request $request)
     {
-       dd(request()->all());
+
        $data = request()->addtocart;
        $user = $request->user;
+
        foreach ($data as $key => $value) {
-            $data[$key] = [
-                "user_id" => $user,
-                "product_id" => $value['id'],
-                "qty" => $value['qty'],
-                "price" => $value['price'],
-                "created_at" => now(),
-                "updated_at" => now(),
+           $data[$key] = [
+               "user_id" => $user['id'],
+               "product_id" => $value['id'],
+               "qty" => $value['order'],
+               "price" => $value['price'],
+               "created_at" => now(),
+               "updated_at" => now(),
             ];
         }
         Invoice::insert($data);
-        return redirect()->back('success', 'Checkout successful');
+        return redirect()->back();
     }
 
 }

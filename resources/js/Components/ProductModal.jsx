@@ -121,9 +121,9 @@ const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
                                     <td>Image</td>
                                     <td>
                                         <input
-                                            type="text"
+                                            type="file"
                                             name="image"
-                                            className="input input-neutral"
+                                            className={`input input-bordered w-full  file-input file-input-secondary`}
                                             onChange={(event) => input(event)}
                                         />
                                     </td>

@@ -38,4 +38,13 @@ class ProductController extends Controller
         Product::find($id)->delete();
         return redirect("product");
     }
+
+    public function category()
+    {
+      
+        return inertia()->render("Category", [
+
+            "Categories" => Category::all(),
+        ]);
+    }
 }

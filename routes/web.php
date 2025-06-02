@@ -28,3 +28,8 @@ Route::get("/product", [ProductController::class, "store"]);
 
 //Route for invoice
 Route::get("/invoice", [InvoiceController::class, "Invoice"]);
+
+
+//Route for category
+Route::get('/category', [ProductController::class, 'category']);
+

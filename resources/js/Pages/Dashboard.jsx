@@ -1,17 +1,17 @@
-import Navbar from "../Components/Navbar";
+import Layout from "./Layouts/Layout";
 import UserTable from "../Components/User_table";
 import { usePage } from "@inertiajs/react";
 import UserModal from "../Components/Usermodal";
-import Sidebar from "../Components/Sidebar";
 
 function Dashboard() {
     const users = usePage().props.users || [];
     return (
         <>
-            <Navbar />
+            <Layout title="Users">
             <UserModal />
-            <Sidebar />
-            <UserTable users={users} />
+            <UserTable users={users}  />
+            </Layout>
+
         </>
     );
 }

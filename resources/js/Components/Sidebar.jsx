@@ -12,7 +12,7 @@ export default function Sidebar() {
         <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
          {navigation.map((item, index) => (
             <li key={index}>
-              <Link href={`/${item.toLowerCase()}`} className="text-lg font-semibold">
+              <Link href={`/${item.toLowerCase()}`} className="text-lg font-semibold  p-5  hover:bg-rose-300 rounded-lg">
                 {item}
               </Link>
             </li>
