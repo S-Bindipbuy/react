@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'home' => 'home',
-    'about' => 'about',
-    'another' => 'another'
+    'home' => 'Home',
+    'about' => 'About',
+    'category' =>'Category',
+    'product' =>'Product',
 ];

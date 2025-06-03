@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Language;
 
 Route::get("/user", function (Request $request) {
     return $request->user();
@@ -18,6 +19,4 @@ Route::post("/delete", [ProductController::class, "Delete"]);
 Route::post("/insert/user", [UserController::class, "InsertUser"]);
 
 Route::post("/checkout", [InvoiceController::class, "Checkout"]);
-Route::get("/abc", function () {
-    return response()->json(["Hello" => 2]);
-});
+Route::get('/navbar/lang', [Language::class, 'Navbar']);

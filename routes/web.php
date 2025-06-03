@@ -33,3 +33,10 @@ Route::get("/invoice", [InvoiceController::class, "Invoice"]);
 //Route for category
 Route::get('/category', [ProductController::class, 'category']);
 
+//Route for language
+
+Route::get('/language/{locale}', function ($locale) {
+    session()->put('locale',$locale);
+    return redirect()->back();
+});
+
