@@ -1,24 +1,19 @@
 import POSLeft from "../Components/PosLeft";
 import POSRight from "../Components/PosRight";
 import { useState } from "react";
-import { usePage,router } from "@inertiajs/react";
+import { usePage, router } from "@inertiajs/react";
 import Layout from "./Layouts/Layout";
 export default function Pos() {
     const [addtocart, setadd] = useState([]);
     const user = usePage().props.auth?.admin || {};
     const checkout = () => {
-
-          if (addtocart.length > 0) {
+        if (addtocart.length > 0) {
             setadd([]);
-            //   console.log("User data:", user);
-            // console.log("Checkout initiated with user:", user);
-            // console.log(addtocart);
             router.post("/api/checkout", { addtocart, user });
-
         } else {
             alert("Please add items to the cart before checking out.");
         }
-  }
+    };
     const modifycart = (cart, qty) => {
         setadd(
             addtocart.map((product) => {
@@ -51,21 +46,20 @@ export default function Pos() {
     const Products = usePage().props.Products || [];
     const Categories = usePage().props.Categories || [];
     return (
-      <Layout>
-          <div className="flex h-svh">
-            <POSLeft
-                addtocart={addtocart}
-                removecart={removecart}
-                modifycart={modifycart}
-                checkout={checkout}
-            />
-            <POSRight
-                addcart={addcart}
-                Products={Products}
-                Categories={Categories}
-            />
-        </div>
-      </Layout>
+        <Layout>
+            <div className="flex h-svh">
+                <POSLeft
+                    addtocart={addtocart}
+                    removecart={removecart}
+                    modifycart={modifycart}
+                    checkout={checkout}
+                />
+                <POSRight
+                    addcart={addcart}
+                    Products={Products}
+                    Categories={Categories}
+                />
+            </div>
+        </Layout>
     );
 }
-

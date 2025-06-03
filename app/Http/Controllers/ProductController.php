@@ -41,9 +41,7 @@ class ProductController extends Controller
 
     public function category()
     {
-      
         return inertia()->render("Category", [
-
             "Categories" => Category::all(),
         ]);
     }

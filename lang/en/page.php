@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'home' => 'Home',
-    'about' => 'About',
-    'category' =>'Category',
-    'product' =>'Product',
+    "dashboard" => "Dashboard",
+    "category" => "Category",
+    "product" => "Product",
+    "invoice" => "Invoice",
 ];

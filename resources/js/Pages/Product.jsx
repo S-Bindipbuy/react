@@ -24,18 +24,17 @@ const Product = () => {
     };
     return (
         <Layout title="Products">
-
             <div>
-            <label
-                htmlFor="ProductModal"
-                className="btn m-5"
-                onClick={(event) => add(event)}
-            >
-                Add New
-            </label>
-            <ProductTable products={products} URL="api/delete/user" />
-            <ProductModal URL={URL} Add={Add} Categories={categories} />
-        </div>
+                <label
+                    htmlFor="ProductModal"
+                    className="btn m-5"
+                    onClick={(event) => add(event)}
+                >
+                    Add New
+                </label>
+                <ProductTable products={products} URL="api/delete/user" />
+                <ProductModal URL={URL} Add={Add} Categories={categories} />
+            </div>
         </Layout>
     );
 };

@@ -68,10 +68,16 @@ class UserController extends Controller
         $user = request()->validate([
             "name" => "required",
             "email" => "required|email",
-            "image" => "required",
+            "image" => "nullable|image|mimes:jpeg,png,jpg",
             "password" => "required|min:8",
             "themes_id" => "required",
         ]);
+
+        if (request()->hasFile("image")) {
+            $imagePath = request()->file("image")->store("users", "public");
+            $user["image"] = $imagePath;
+        }
+
         $newuser = User::create($user);
 
         return response()->json(["status" => "1", $newuser]);

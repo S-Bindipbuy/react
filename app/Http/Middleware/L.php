@@ -10,9 +10,10 @@ class L
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $LLDD = session() -> get('locale');
-        if (isset($LLDD))
-            app() -> setLocale($LLDD);
+        $LLDD = session()->get("locale");
+        if (isset($LLDD)) {
+            app()->setLocale($LLDD);
+        }
         return $next($request);
     }
 }
