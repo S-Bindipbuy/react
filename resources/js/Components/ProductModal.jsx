@@ -1,31 +1,54 @@
 import { useForm } from "@inertiajs/react";
+import { useEffect } from "react";
 
 const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
-    const { data, setData, post } = useForm({
+    const { data, setData, post, reset } = useForm({
+
         name: Product?.name || "",
+        id: Product?.id || "",
         price: Product?.price || "",
         image: "",
         description: Product?.description || "",
         category_id: Product?.catgory_id || 1,
         qty: Product?.qty || 1,
     });
-    const input = (event) => {
+   useEffect(() => {
+    setData({
+        id: Product?.id || "",
+        name: Product?.name || "",
+        price: Product?.price || "",
+        image: "",
+        description: Product?.description || "",
+        category_id: Product?.category_id || 1,
+        qty: Product?.qty || 1,
+    });
+}, [Product]);
+
+
+     const input = (event) => {
         const name = event.target.name;
-        const abc = event.target.value;
-        setData(name, abc);
+        if (name === "image") {
+            setData("image", event.target.files[0]); // Store file in state
+        } else {
+            setData(name, event.target.value);
+        }
     };
 
     const submit = (event) => {
         event.preventDefault();
-        post(URL, {
-            onSuccess: () => {
-                window.location.reload();
-            },
-            onError: (errors) => {
-                alert(errors.error || "Something went wrong!");
-            },
+
+        // Create FormData object
+        const formData = new FormData();
+        Object.keys(data).forEach((key) => {
+            formData.append(key, data[key]);
         });
-        document.getElementById("ProductModal").click();
+
+        post(URL, {
+            data: formData,
+            headers: { "Content-Type": "multipart/form-data" }, // Required for file uploads
+            onSuccess: () => {alert("Upload successful!"); reset();}, // Reset form on success
+            onError: (errors) => alert(errors.error || "Something went wrong!"),
+        });
     };
 
     return (
@@ -42,8 +65,9 @@ const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
                                         <td>Category ID</td>
                                         <td>
                                             <input
+                                                value={data.id}
                                                 type="text"
-                                                name="category_id"
+                                                name="id"
                                                 className="input input-neutral"
                                                 onChange={(event) =>
                                                     input(event)
@@ -56,6 +80,7 @@ const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
                                     <td>Name</td>
                                     <td>
                                         <input
+                                             value={data.name}
                                             type="text"
                                             name="name"
                                             className="input input-neutral"
@@ -87,6 +112,7 @@ const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
                                     <td>Quantity</td>
                                     <td>
                                         <input
+                                            value={data.qty}
                                             type="text"
                                             name="qty"
                                             className="input input-neutral"
@@ -98,6 +124,7 @@ const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
                                     <td>Price</td>
                                     <td>
                                         <input
+                                            value={data.price}
                                             type="text"
                                             name="price"
                                             className="input input-neutral"
@@ -121,6 +148,7 @@ const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
                                     <td>Image</td>
                                     <td>
                                         <input
+
                                             type="file"
                                             name="image"
                                             className={`input input-bordered w-full  file-input file-input-secondary`}

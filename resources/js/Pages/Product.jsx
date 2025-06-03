@@ -12,15 +12,19 @@ const Product = () => {
     const [Add, setAdd] = useState(true);
 
     const [product, setProduct] = useState({});
+
     const add = (event) => {
         setProduct({});
         setAdd(true);
         setURL("/api/insert");
     };
-    const update = (event) => {
-        setProduct(event.target.value);
+    const update = (data) => {
+        setProduct(data);
         setAdd(false);
         setURL("/api/update");
+        setProduct(data);
+
+        document.getElementById("ProductModal").checked = true;
     };
     return (
         <Layout title="Products">
@@ -32,8 +36,8 @@ const Product = () => {
                 >
                     Add New
                 </label>
-                <ProductTable products={products} URL="api/delete/user" />
-                <ProductModal URL={URL} Add={Add} Categories={categories} />
+                <ProductTable products={products} update={update}  URL="api/delete/user" />
+                <ProductModal URL={URL} Add={Add} Categories={categories} Product={product} />
             </div>
         </Layout>
     );

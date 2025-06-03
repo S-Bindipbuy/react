@@ -14,7 +14,7 @@ function POSLeft({ addtocart = [], removecart, modifycart, checkout }) {
     return (
         <>
             <div className="grid-row-2 grid p-[10px] w-full">
-                <div className="w-full max-h-[80vh] overflow-y-auto bg-white shadow-md">
+                <div className="w-full max-h-[80vh] overflow-y-auto bg-white shadow-md h-screen">
                     {addtocart.map((card) => {
                         return (
                             <AddtoCard

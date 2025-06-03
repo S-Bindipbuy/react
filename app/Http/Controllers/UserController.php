@@ -82,4 +82,16 @@ class UserController extends Controller
 
         return response()->json(["status" => "1", $newuser]);
     }
+    // public function Update()
+    // {
+
+    //     $user = request()->all();
+
+    //     if (request()->hasFile("image")) {
+    //         $imagePath = request()->file("image")->store("users", "public");
+    //         $user["image"] = $imagePath;
+    //     }
+    //      User::find(request()->id)->update($user);
+    //     return redirect()->back();
+    // }
 }

@@ -1,6 +1,6 @@
 import { router } from "@inertiajs/react";
 
-const ProductTable = ({ products, URL }) => {
+const ProductTable = ({ products, URL, update}) => {
     const deletepro = (event, id) => {
         event.preventDefault();
         router.post(URL, { id: id });
@@ -63,7 +63,7 @@ const ProductTable = ({ products, URL }) => {
                                     <td>{data.description}</td>
                                     <td>{data.qty}</td>
                                     <th>
-                                        <button className="btn btn-ghost btn-xs">
+                                        <button className="btn btn-ghost btn-xs" onClick={() => update(data)}>
                                             details
                                         </button>
                                         <button
