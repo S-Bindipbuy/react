@@ -1,10 +1,11 @@
 <?php
 
 namespace Database\Seeders;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Carbon\Carbon;
 
 class UserSeeder extends Seeder
 {
