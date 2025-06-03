@@ -4,7 +4,7 @@ const UserTable = (users) => {
     const All_User = users.users || [];
 
     function insertUser() {
-        document.getElementById('UserModal').click();
+        document.getElementById("UserModal").click();
     }
 
     const user_delete = (event, id) => {
@@ -14,14 +14,22 @@ const UserTable = (users) => {
 
     return (
         <div>
-            <button onClick={(event)=>insertUser(event)} className="btn my-5 ml-5">Insert User</button>
+            <button
+                onClick={(event) => insertUser(event)}
+                className="btn my-5 ml-5"
+            >
+                Insert User
+            </button>
             <div className="overflow-x-auto">
                 <table className="table">
                     <thead>
                         <tr>
                             <th>
                                 <label>
-                                    <input type="checkbox" className="checkbox" />
+                                    <input
+                                        type="checkbox"
+                                        className="checkbox"
+                                    />
                                 </label>
                             </th>
                             <th>Name</th>
@@ -47,7 +55,7 @@ const UserTable = (users) => {
                                             <div className="avatar">
                                                 <div className="mask mask-squircle h-12 w-12">
                                                     <img
-                                                        src={u.image}
+                                                        src={`storage/${u.image}`}
                                                         alt="Avatar Tailwind CSS Component"
                                                     />
                                                 </div>

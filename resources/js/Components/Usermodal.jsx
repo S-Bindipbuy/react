@@ -2,34 +2,51 @@ import axios from "axios";
 import { useState } from "react";
 
 function UserModal() {
-    const [errors, seterror] = useState([]);
+    const [errors, setError] = useState([]);
     const [data, setData] = useState({
         name: "",
         email: "",
         password: "",
-        image: "",
         themes_id: 1,
+        image: null,
     });
 
     const submit = async (event) => {
         event.preventDefault();
+        const formData = new FormData();
+
+        Object.keys(data).forEach((key) => {
+            formData.append(key, data[key]);
+        });
+
         axios
-            .post("http://localhost:8000/api/insert/user", data)
+            .post("http://localhost:8000/api/insert/user", formData, {
+                headers: { "Content-Type": "multipart/form-data" }, // Required for file uploads
+            })
             .then((response) => {
                 alert(response.data.status);
-                seterror({});
+                setError({});
             })
             .catch((error) => {
-                seterror(error.response.data.errors);
+                setError(error.response?.data?.errors || {});
                 console.error(error);
             });
     };
 
     const input = (event) => {
-        console.log(data);
         const name = event.target.name;
-        const value = event.target.value;
-        setData((prevdata) => ({ ...prevdata, [name]: value }));
+
+        if (name === "image") {
+            setData((prevData) => ({
+                ...prevData,
+                image: event.target.files[0],
+            })); // Store file object
+        } else {
+            setData((prevData) => ({
+                ...prevData,
+                [name]: event.target.value,
+            }));
+        }
     };
 
     return (
@@ -48,7 +65,7 @@ function UserModal() {
                                         <input
                                             type="text"
                                             name="name"
-                                            className={`input input-bordered w-full ${errors.name ? "input-error" : ""}`}
+                                            className="input input-bordered w-full"
                                             onChange={input}
                                         />
                                     </td>
@@ -59,7 +76,7 @@ function UserModal() {
                                         <input
                                             type="email"
                                             name="email"
-                                            className={`input input-bordered w-full ${errors.email ? "input-error" : ""}`}
+                                            className="input input-bordered w-full"
                                             onChange={input}
                                         />
                                     </td>
@@ -70,19 +87,20 @@ function UserModal() {
                                         <input
                                             type="password"
                                             name="password"
-                                            className={`input input-bordered w-full ${errors.password ? "input-error" : ""}`}
+                                            className="input input-bordered w-full"
                                             onChange={input}
                                         />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Image URL</td>
+                                    <td>Image File</td>
                                     <td>
                                         <input
                                             type="file"
                                             name="image"
-                                            className={`input input-bordered w-full ${errors.image ? "input-error" : ""} file-input file-input-secondary`}
+                                            className="input file-input file-input-secondary"
                                             onChange={input}
+                                            accept="image/*"
                                         />
                                     </td>
                                 </tr>
