@@ -12,7 +12,7 @@ const Product = () => {
     const [Add, setAdd] = useState(true);
 
     const [product, setProduct] = useState({});
-
+    const deletURL = "/api/delete";
     const add = (event) => {
         setProduct({});
         setAdd(true);
@@ -36,8 +36,8 @@ const Product = () => {
                 >
                     Add New
                 </label>
-                <ProductTable products={products} update={update}  URL="api/delete/user" />
-                <ProductModal URL={URL} Add={Add} Categories={categories} Product={product} />
+                <ProductTable products={products} update={update} deletURL={deletURL} />
+                <ProductModal URL={URL} Add={Add} Categories={categories} Product={product}  />
             </div>
         </Layout>
     );

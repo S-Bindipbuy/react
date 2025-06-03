@@ -1,9 +1,9 @@
 import { router } from "@inertiajs/react";
 
-const ProductTable = ({ products, URL, update}) => {
+const ProductTable = ({ products, deletURL, update}) => {
     const deletepro = (event, id) => {
         event.preventDefault();
-        router.post(URL, { id: id });
+        router.post(deletURL, { id: id });
     };
     return (
         <div>

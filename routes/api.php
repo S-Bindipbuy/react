@@ -26,3 +26,5 @@ Route::get("/language/{locale}", function ($locale) {
 Route::get("/navbar/lang", [Language::class, "Navbar"]);
 
 Route::post('/update', [ProductController::class, 'Update']);
+
+
