@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -58,10 +57,10 @@ class UserController extends Controller
     public function Delete(): RedirectResponse
     {
         $user = request()->validate([
-            "id" => "required|string",
+            "id" => "required",
         ]);
-        User::find($user->id)->delete();
-        return redirect("login");
+        User::find($user["id"])->delete();
+        return redirect()->back();
     }
 
     public function InsertUser()

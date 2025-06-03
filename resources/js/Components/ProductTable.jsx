@@ -1,10 +1,10 @@
 import { router } from "@inertiajs/react";
 
-const ProductTable = ({ products,URL }) => {
-    const deletepro = (event, id) =>{
+const ProductTable = ({ products, URL }) => {
+    const deletepro = (event, id) => {
         event.preventDefault();
-        router.post(URL, {id: id});
-    }
+        router.post(URL, { id: id });
+    };
     return (
         <div>
             <div className="overflow">
@@ -37,10 +37,10 @@ const ProductTable = ({ products,URL }) => {
                                             <input
                                                 type="checkbox"
                                                 className="checkbox"
-                                                />
+                                            />
                                         </label>
                                     </th>
-                                                <td>{data.id}</td>
+                                    <td>{data.id}</td>
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
@@ -66,7 +66,12 @@ const ProductTable = ({ products,URL }) => {
                                         <button className="btn btn-ghost btn-xs">
                                             details
                                         </button>
-                                        <button className="btn btn-ghost btn-xs" onClick={(event)=>deletepro(event, data.id)}>
+                                        <button
+                                            className="btn btn-ghost btn-xs"
+                                            onClick={(event) =>
+                                                deletepro(event, data.id)
+                                            }
+                                        >
                                             delete
                                         </button>
                                     </th>

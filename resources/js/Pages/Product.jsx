@@ -1,6 +1,6 @@
 import ProductTable from "../Components/ProductTable";
 import ProductModal from "../Components/ProductModal";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { usePage } from "@inertiajs/react";
 import Layout from "./Layouts/Layout";
 
@@ -24,7 +24,7 @@ const Product = () => {
     };
     return (
         <Layout title="Products">
-            
+
             <div>
             <label
                 htmlFor="ProductModal"
@@ -33,7 +33,7 @@ const Product = () => {
             >
                 Add New
             </label>
-            <ProductTable products={products} URL="api/delete" />
+            <ProductTable products={products} URL="api/delete/user" />
             <ProductModal URL={URL} Add={Add} Categories={categories} />
         </div>
         </Layout>
