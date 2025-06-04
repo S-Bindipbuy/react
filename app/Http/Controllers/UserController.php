@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function All(): Response
     {
-        return inertia("Dashboard", [
+        return inertia("User", [
             "users" => User::with("themes:id,name")->get([
                 "id",
                 "name",
@@ -32,7 +32,7 @@ class UserController extends Controller
         if (!Auth::attempt($user)) {
             return redirect("login");
         }
-        return redirect("dashboard");
+        return redirect("pos");
     }
     public function Logout(): RedirectResponse
     {
@@ -74,24 +74,31 @@ class UserController extends Controller
         ]);
 
         if (request()->hasFile("image")) {
-            $imagePath = request()->file("image")->store("users", "public");
-            $user["image"] = $imagePath;
+            $imagePath = request()->file("image");
+            $imageName = time() . '.' . $imagePath -> getClientOriginalExtension();
+            $imagePath -> move('users', $imageName);
+            $user["image"] = $imageName;
         }
 
         $newuser = User::create($user);
-
-        return response()->json(["status" => "1", $newuser]);
+        return redirect() -> back();
     }
-    // public function Update()
-    // {
+    public function Update()
+    {
+        $user = request()->except(["password", "image"]);
 
-    //     $user = request()->all();
-
-    //     if (request()->hasFile("image")) {
-    //         $imagePath = request()->file("image")->store("users", "public");
-    //         $user["image"] = $imagePath;
-    //     }
-    //      User::find(request()->id)->update($user);
-    //     return redirect()->back();
-    // }
+        if (request()->image) {
+            if (request()->hasFile("image")) {
+                $imagePath = request()->file("image");
+                $imageName = time() . '.' . $imagePath -> getClientOriginalExtension();
+                $imagePath -> move('users', $imageName);
+                $user["image"] = $imageName;
+            }
+        }
+        if (request() -> password) {
+            $user["password"] = request() -> password;
+        }
+        User::find(request()->id)->update($user);
+        return redirect()->back();
+    }
 }

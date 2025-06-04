@@ -1,14 +1,16 @@
 import { usePage } from "@inertiajs/react";
-import Navbar from "../Components/Navbar";
 import UserTable from "../Components/User_table";
+import UserModal from "../Components/Usermodal";
+import { useState } from "react";
+import Layout from "./Layouts/Layout";
 const User = () => {
-    const users = usePage().props?.admins || [];
+    const users = usePage().props?.users || [];
+    const [URL, setURL] = useState();
     return (
-        <div>
-            <Navbar />
-            <UserTable Users={users} />
-        </div>
+        <Layout title="Users">
+            <UserModal URL={URL}/>
+            <UserTable users={users} setURL={setURL} />
+        </Layout>
     );
 };
-
 export default User;

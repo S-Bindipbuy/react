@@ -12,16 +12,16 @@ const Product = () => {
     const [Add, setAdd] = useState(true);
 
     const [product, setProduct] = useState({});
-    const deletURL = "/api/delete";
+    const deletURL = "/delete/product";
     const add = (event) => {
         setProduct({});
         setAdd(true);
-        setURL("/api/insert");
+        setURL("/insert/product");
     };
     const update = (data) => {
         setProduct(data);
         setAdd(false);
-        setURL("/api/update");
+        setURL("/update/product");
         setProduct(data);
 
         document.getElementById("ProductModal").checked = true;

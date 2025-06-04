@@ -3,7 +3,6 @@ import { useEffect } from "react";
 
 const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
     const { data, setData, post, reset } = useForm({
-
         name: Product?.name || "",
         id: Product?.id || "",
         price: Product?.price || "",
@@ -12,17 +11,18 @@ const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
         category_id: Product?.catgory_id || 1,
         qty: Product?.qty || 1,
     });
-   useEffect(() => {
-    setData({
-        id: Product?.id || "",
-        name: Product?.name || "",
-        price: Product?.price || "",
-        image: "",
-        description: Product?.description || "",
-        category_id: Product?.category_id || 1,
-        qty: Product?.qty || 1,
-    });
-}, [Product]);
+
+    useEffect(() => {
+        setData({
+            id: Product?.id || "",
+            name: Product?.name || "",
+            price: Product?.price || "",
+            image: "",
+            description: Product?.description || "",
+            category_id: Product?.category_id || 1,
+            qty: Product?.qty || 1,
+        });
+    }, [Product]);
 
 
      const input = (event) => {
@@ -37,16 +37,14 @@ const ProductModal = ({ Modal, Product, URL, Add, Categories }) => {
     const submit = (event) => {
         event.preventDefault();
 
-        // Create FormData object
-        const formData = new FormData();
-        Object.keys(data).forEach((key) => {
-            formData.append(key, data[key]);
-        });
-
         post(URL, {
-            data: formData,
-            headers: { "Content-Type": "multipart/form-data" }, // Required for file uploads
-            onSuccess: () => {alert("Upload successful!"); reset();}, // Reset form on success
+            data: data,
+            headers: { "Content-Type": "multipart/form-data" },
+            onSuccess: () => {
+                alert("Upload successful!");
+                reset();
+                document.getElementById("ProductModal").checked = false;
+            },
             onError: (errors) => alert(errors.error || "Something went wrong!"),
         });
     };

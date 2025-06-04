@@ -1,9 +1,7 @@
-import axios from "axios";
-import { useState } from "react";
+import { useForm } from "@inertiajs/react";
 
-function UserModal() {
-    const [errors, setError] = useState([]);
-    const [data, setData] = useState({
+function UserModal({URL}) {
+    const {data, setData, post} = useForm({
         name: "",
         email: "",
         password: "",
@@ -13,24 +11,7 @@ function UserModal() {
 
     const submit = async (event) => {
         event.preventDefault();
-        const formData = new FormData();
-
-        Object.keys(data).forEach((key) => {
-            formData.append(key, data[key]);
-        });
-
-        axios
-            .post("http://localhost:8000/api/insert/user", formData, {
-                headers: { "Content-Type": "multipart/form-data" }, // Required for file uploads
-            })
-            .then((response) => {
-                alert(response.data.status);
-                setError({});
-            })
-            .catch((error) => {
-                setError(error.response?.data?.errors || {});
-                console.error(error);
-            });
+        post(URL, data);
     };
 
     const input = (event) => {
@@ -40,7 +21,7 @@ function UserModal() {
             setData((prevData) => ({
                 ...prevData,
                 image: event.target.files[0],
-            })); // Store file object
+            }));
         } else {
             setData((prevData) => ({
                 ...prevData,

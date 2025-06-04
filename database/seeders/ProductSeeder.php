@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
                 "name" => "Pizza",
                 "qty" => "10",
                 "price" => "100",
-                "image" => "abc",
+                "image" => "pizza.png",
                 "description" => "pizza",
                 "category_id" => "1",
                 "created_at" => Carbon::now(),

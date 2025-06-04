@@ -1,9 +1,10 @@
 import { router } from "@inertiajs/react";
 
-const UserTable = (users) => {
-    const All_User = users.users || [];
+const UserTable = ({ users, setURL }) => {
+    const All_User = users || [];
 
     function insertUser() {
+        setURL("/insert/user");
         document.getElementById("UserModal").click();
     }
 
@@ -55,7 +56,7 @@ const UserTable = (users) => {
                                             <div className="avatar">
                                                 <div className="mask mask-squircle h-12 w-12">
                                                     <img
-                                                        src={`storage/${u.image}`}
+                                                        src={`users/${u.image}`}
                                                         alt="Avatar Tailwind CSS Component"
                                                     />
                                                 </div>

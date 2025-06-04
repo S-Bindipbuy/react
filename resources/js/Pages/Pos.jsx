@@ -5,11 +5,11 @@ import { usePage, router } from "@inertiajs/react";
 import Layout from "./Layouts/Layout";
 export default function Pos() {
     const [addtocart, setadd] = useState([]);
-    const user = usePage().props.auth?.admin || {};
+    const user = usePage().props.auth?.user || {};
     const checkout = () => {
         if (addtocart.length > 0) {
             setadd([]);
-            router.post("/api/checkout", { addtocart, user });
+            router.post("/checkout", { addtocart, user });
         } else {
             alert("Please add items to the cart before checking out.");
         }

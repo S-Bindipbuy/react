@@ -3,13 +3,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Sidebar() {
-    const [navbar, setnavbar] = useState({});
-    useEffect(() => {
-        axios
-            .get("http://localhost:8000/api/navbar/lang")
-            .then((response) => setnavbar(response.data))
-            .catch((error) => console.error("Error fetching data:", error));
-    }, []);
+    const [navbar, setnavbar] = useState({
+        "Dashboard": "User",
+        "Category": "Category",
+        "Product": "Product",
+        "Invoice": "Invoice"
+    });
     return (
         <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />

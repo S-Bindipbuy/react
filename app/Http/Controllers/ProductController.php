@@ -5,24 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Inertia\Response;
+use Illuminate\Http\RedirectResponse;
 
 class ProductController extends Controller
 {
-    public function all(): Response
-    {
-        return inertia()->render("Pos", [
-            "Products" => Product::with("category")->get(),
-            "Categories" => Category::all(),
-        ]);
-    }
-    public function store()
+    public function Show() : Response
     {
         return inertia()->render("Product", [
             "Products" => Product::with("category")->get(),
             "categories" => Category::all(),
         ]);
     }
-    public function Insert()
+    public function Order() : Response
+    {
+        return inertia()->render("Pos", [
+            "Products" => Product::with("category")->get(),
+            "categories" => Category::all(),
+        ]);
+    }
+    public function Insert() : RedirectResponse
     {
         $validatedData = request()->validate([
             "name" => "required|string|max:255",
@@ -31,9 +32,8 @@ class ProductController extends Controller
             "qty" => "required|integer|min:0",
             "description" => "nullable|string|max:1000",
             "image" => "nullable|image|mimes:jpeg,png,jpg,gif",
-
-
         ]);
+
         if (request()->hasFile("image")) {
             $image = request()->file("image");
             $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -45,24 +45,24 @@ class ProductController extends Controller
                 ->back()
                 ->with("success", "User created successfully!");
         }
-        return response()->json(["error" => "Failed to create user"], 500);
+        return redirect()->back(["error" => "Failed to create user"]);
     }
 
-    public function Delete()
+    public function Delete() : RedirectResponse
     {
         $id = request()->id;
         Product::find($id)->delete();
         return redirect("product");
     }
 
-    public function category()
+    public function category() : Response
     {
         return inertia()->render("Category", [
             "Categories" => Category::all(),
         ]);
     }
 
-     public function Update()
+    public function Update() : RedirectResponse
     {
 
         $product = request()->except('image');
@@ -71,9 +71,7 @@ class ProductController extends Controller
             $imagePath = request()->file("image")->store("products", "public");
             $product["image"] = $imagePath;
         }
-         product::find(request()->id)->update($product);
+         Product::find(request()->id)->update($product);
         return redirect()->back();
     }
-
-
 }
