@@ -14,6 +14,8 @@ function Invoice({ invoice }){
         <th>ID</th>
         <th>User</th>
         <th>Products</th>
+        <th>Price</th>
+        <th>Qty</th>
         <th>Date</th>
       </tr>
     </thead>
@@ -26,6 +28,8 @@ function Invoice({ invoice }){
                 <th>{data.id}</th>
                 <th>{data.user.name}</th>
                 <th>{data.product.name}</th>
+                <th>{data.price}$</th>
+                <th>{data.qty}</th>
                 <th>{data.created_at}</th>
             </tr>
             )

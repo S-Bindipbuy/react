@@ -1,9 +1,11 @@
 import React from "react";
+import { usePage } from "@inertiajs/react";
 
 function Navbar() {
+  const props = usePage().props;
+  const user = props.auth.user;
+
   return (
-
-
       <div className="drawer-content flex flex-col">
         <div className="navbar bg-base-100 shadow-sm">
           <div className="flex-1">
@@ -27,7 +29,7 @@ function Navbar() {
                 className="btn btn-ghost btn-circle avatar"
               >
                 <div className="w-10 rounded-full">
-                  <img alt="profile" src="cute.jpg" />
+                  <img alt="profile" src={`storage/users/${user.image}`} />
                 </div>
               </div>
               <ul
