@@ -43,7 +43,7 @@ function Navbar() {
                   <a>Settings</a>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <a href="/user/logout">Logout</a>
                 </li>
               </ul>
             </div>

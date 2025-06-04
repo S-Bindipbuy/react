@@ -9,10 +9,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Middleware\Dashboard;
 // Route for Admin
 Route::get("/admin", [AdminController::class, "all"]);
-Route::get("/pos", [ProductController::class, "Order"]);
 Route::get("/dashboard/product", [ProductController::class, "store"]);
 Route::middleware(Dashboard::class)->group(function () {
     Route::get("/user", [UserController::class, "All"]);
+    Route::get("/pos", [ProductController::class, "Order"]);
 
     //Route for category
     Route::get("/category", [ProductController::class, "category"]);
@@ -38,6 +38,7 @@ Route::post("/ChangeTheme", [AdminController::class, "Theme"]);
 Route::post("/user_delete", [UserController::class, "Delete"]);
 Route::post("/user_delete", [UserController::class, "Delete"]);
 
+Route::get("/user/logout", [UserController::class, "Logout"]);
 //Route for Login
 Route::get("/login", function () {
     return inertia()->render("Login");
