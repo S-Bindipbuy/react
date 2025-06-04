@@ -56,7 +56,7 @@ const UserTable = ({ users, setURL }) => {
                                             <div className="avatar">
                                                 <div className="mask mask-squircle h-12 w-12">
                                                     <img
-                                                        src={`users/${u.image}`}
+                                                        src={`storage/users/${u.image}`}
                                                         alt="Avatar Tailwind CSS Component"
                                                     />
                                                 </div>

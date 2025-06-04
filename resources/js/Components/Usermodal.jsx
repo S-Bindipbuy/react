@@ -1,7 +1,7 @@
 import { useForm } from "@inertiajs/react";
 
 function UserModal({URL}) {
-    const {data, setData, post} = useForm({
+    const {data, setData, reset, post} = useForm({
         name: "",
         email: "",
         password: "",
@@ -12,6 +12,7 @@ function UserModal({URL}) {
     const submit = async (event) => {
         event.preventDefault();
         post(URL, data);
+        reset();
     };
 
     const input = (event) => {
@@ -46,6 +47,7 @@ function UserModal({URL}) {
                                         <input
                                             type="text"
                                             name="name"
+                                            value={data.name}
                                             className="input input-bordered w-full"
                                             onChange={input}
                                         />
@@ -57,6 +59,7 @@ function UserModal({URL}) {
                                         <input
                                             type="email"
                                             name="email"
+                                            value={data.email}
                                             className="input input-bordered w-full"
                                             onChange={input}
                                         />
@@ -68,6 +71,7 @@ function UserModal({URL}) {
                                         <input
                                             type="password"
                                             name="password"
+                                            value={data.password}
                                             className="input input-bordered w-full"
                                             onChange={input}
                                         />

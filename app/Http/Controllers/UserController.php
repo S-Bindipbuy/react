@@ -76,7 +76,7 @@ class UserController extends Controller
         if (request()->hasFile("image")) {
             $imagePath = request()->file("image");
             $imageName = time() . '.' . $imagePath -> getClientOriginalExtension();
-            $imagePath -> move('users', $imageName);
+            $imagePath -> storeAs('users', $imageName, 'public');
             $user["image"] = $imageName;
         }
 
@@ -91,7 +91,7 @@ class UserController extends Controller
             if (request()->hasFile("image")) {
                 $imagePath = request()->file("image");
                 $imageName = time() . '.' . $imagePath -> getClientOriginalExtension();
-                $imagePath -> move('users', $imageName);
+                $imagePath -> storeAs('users', $imageName, 'public');
                 $user["image"] = $imageName;
             }
         }
