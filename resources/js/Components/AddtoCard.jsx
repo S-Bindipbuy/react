@@ -1,15 +1,18 @@
 import { useState } from "react";
 const AddtoCard = ({ removecart, id, name, price, image, modifycart }) => {
     const [qty, setqty] = useState(1);
+    const [total, settotal] = useState();
     const cart = { id, name, price, image };
     const add = () => {
         setqty((qty) => qty + 1);
         modifycart(cart, qty + 1);
+        settotal((qty + 1) * price);
     };
     const remove = () => {
         if (qty > 1) {
             setqty((qty) => qty - 1);
             modifycart(cart, qty - 1);
+            settotal((qty - 1) * price);
         }
     };
     return (
@@ -21,7 +24,7 @@ const AddtoCard = ({ removecart, id, name, price, image, modifycart }) => {
 
                 <li className="list-row">
                     <div>
-                        <img className="size-10 rounded-box" src={image} />
+                        <img className="size-10 rounded-box" src={`storage/images/${image}`} />
                     </div>
                     <div>
                         <div>{name}</div>

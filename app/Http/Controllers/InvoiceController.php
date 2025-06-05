@@ -28,6 +28,7 @@ class InvoiceController extends Controller
                "product_id" => $value['id'],
                "qty" => $value['order'],
                "price" => $value['price'],
+               "total" => $value['total'],
                "created_at" => now(),
                "updated_at" => now(),
             ];

@@ -21,9 +21,28 @@ class User extends Authenticatable
     // protected $fillable = ["name", "email", "password"];
     protected $guarded = [];
 
+    public function isUser() : bool {
+        if ($this -> role -> name == "User") {
+            return true;
+        }
+        return false;
+    }
+
+    public function isAdmin() : bool {
+        if ($this -> role -> name == "Admin") {
+            return true;
+        }
+        return false;
+    }
+
     public function themes()
     {
         return $this->belongsTo(Themes::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 
     /**

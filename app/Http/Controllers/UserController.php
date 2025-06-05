@@ -6,6 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Themes;
+use App\Models\Role;
 use Inertia\Response;
 
 class UserController extends Controller
@@ -13,13 +14,14 @@ class UserController extends Controller
     public function All(): Response
     {
         return inertia("User", [
-            "users" => User::with("themes:id,name")->get([
+            "users" => User::with(["themes:id,name", "role"])->get([
                 "id",
                 "name",
                 "email",
                 "image",
                 "themes_id",
             ]),
+            "roles" => Role::all()
         ]);
     }
 
@@ -31,6 +33,12 @@ class UserController extends Controller
         ]);
         if (!Auth::attempt($user)) {
             return redirect("login");
+        }
+        if (Auth::user() -> isUser()) {
+            return redirect("pos");
+        }
+        if (Auth::user() -> isAdmin()) {
+            return redirect("dashboard");
         }
         return redirect("pos");
     }
@@ -71,6 +79,7 @@ class UserController extends Controller
             "image" => "nullable|image|mimes:jpeg,png,jpg",
             "password" => "required|min:8",
             "themes_id" => "required",
+            "role_id" => "required",
         ]);
 
         if (request()->hasFile("image")) {
@@ -83,7 +92,7 @@ class UserController extends Controller
         $newuser = User::create($user);
         return redirect() -> back();
     }
-    public function Update()
+    public function UpdateUser()
     {
         $user = request()->except(["password", "image"]);
 

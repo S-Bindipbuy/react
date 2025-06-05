@@ -1,5 +1,5 @@
 function ProductCard({ addcart, name, id, image, price, category }) {
-    const card = { id, name, price, image };
+    const card = { id, name, price, image, total: price };
     return (
         <div
             className="card bg-base-100 shadow-sm w-full max-w-sm sm:max-w-md md:max-w-lg"
@@ -8,7 +8,7 @@ function ProductCard({ addcart, name, id, image, price, category }) {
         >
             <figure className="w-full">
                 <img
-                    src={image}
+                    src={`storage/images/${image}`}
                     alt="Product"
                     className="w-full h-auto object-cover rounded-md"
                 />

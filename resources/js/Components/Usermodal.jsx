@@ -1,13 +1,28 @@
-import { useForm } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
+import { useEffect } from "react";
 
-function UserModal({URL}) {
+function UserModal({URL, u, statebutton}) {
+    const roles = usePage().props.roles || "";
     const {data, setData, reset, post} = useForm({
-        name: "",
-        email: "",
-        password: "",
+        id: u.id || "",
+        name: u.name || "",
+        email: u.email || "",
+        password: u.password || "",
         themes_id: 1,
         image: null,
+        role_id: u.roles?.id || 1
     });
+
+    useEffect(() => {
+
+        setData("id", u.id || ""),
+        setData("name", u.name || ""),
+        setData("email", u.email || ""),
+        setData("password", u.password || ""),
+        setData("themes_id", 1),
+        setData("image", null),
+        setData("role_id", u.roles?.id || 1)
+    }, [u]);
 
     const submit = async (event) => {
         event.preventDefault();
@@ -31,6 +46,10 @@ function UserModal({URL}) {
         }
     };
 
+    const role = (event) => {
+        setData("role_id", event.target.value)
+    }
+
     return (
         <div>
             <input type="checkbox" id="UserModal" className="modal-toggle" />
@@ -41,6 +60,16 @@ function UserModal({URL}) {
                     <form onSubmit={submit}>
                         <table className="table">
                             <tbody>
+                                <tr>
+                                    <td>Role</td>
+                                    <td>
+                                        <select name="role" onChange={(map) => role(map)} className="select">
+                                            {roles.map((role) => {
+                                                return   <option value={role.id} key={role.id}>{role.name}</option>
+                                            })}
+                                        </select>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>Name</td>
                                     <td>

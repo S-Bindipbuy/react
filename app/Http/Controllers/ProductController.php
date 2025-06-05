@@ -20,7 +20,7 @@ class ProductController extends Controller
     {
         return inertia()->render("Pos", [
             "Products" => Product::with("category")->get(),
-            "categories" => Category::all(),
+            "Categories" => Category::all(),
         ]);
     }
     public function Insert() : RedirectResponse
@@ -37,8 +37,8 @@ class ProductController extends Controller
         if (request()->hasFile("image")) {
             $image = request()->file("image");
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $validatedData['image'] = 'images/' . $imageName;
+            $image->storeAs('images', $imageName, 'public');
+            $validatedData['image'] = $imageName;
         }
         if (Product::create($validatedData)) {
             return redirect()
@@ -68,8 +68,10 @@ class ProductController extends Controller
         $product = request()->except('image');
 
         if (request()->hasFile("image")) {
-            $imagePath = request()->file("image")->store("products", "public");
-            $product["image"] = $imagePath;
+            $image = request()->file("image");
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('images', $imageName, 'public');
+            $product["image"] = $imageName;
         }
          Product::find(request()->id)->update($product);
         return redirect()->back();

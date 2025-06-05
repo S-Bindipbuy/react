@@ -1,10 +1,11 @@
 import { router } from "@inertiajs/react";
 
-const UserTable = ({ users, setURL }) => {
+const UserTable = ({ users, setURL, changeState1, changeState2 }) => {
     const All_User = users || [];
 
     function insertUser() {
         setURL("/insert/user");
+        changeState1();
         document.getElementById("UserModal").click();
     }
 
@@ -75,7 +76,7 @@ const UserTable = ({ users, setURL }) => {
                                     </td>
                                     <td>{u.themes.name}</td>
                                     <th>
-                                        <button className="btn btn-ghost btn-xs">
+                                        <button className="btn btn-ghost btn-xs" onClick={() => changeState2(u)}>
                                             details
                                         </button>
                                         <button

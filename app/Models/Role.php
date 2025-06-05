@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class Role extends Model
 {
     use SoftDeletes, HasFactory, Notifiable;
-    protected $table = "role";
+    protected $table = "roles";
     protected $guarded = [];
 
     public function user()

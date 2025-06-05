@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
                 "password" => Hash::make("admin123"),
                 "image" => "cute.jpg",
                 "themes_id" => "1",
+                "role_id" => "1",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now(),
             ],

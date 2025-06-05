@@ -46,7 +46,7 @@ const ProductTable = ({ products, deletURL, update}) => {
                                             <div className="avatar">
                                                 <div className="mask mask-squircle h-12 w-12">
                                                     <img
-                                                        src={data.image}
+                                                        src={`storage/images/${data.image}`}
                                                         alt="Avatar Tailwind CSS Component"
                                                     />
                                                 </div>

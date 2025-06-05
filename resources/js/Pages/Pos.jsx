@@ -1,8 +1,9 @@
+import { usePage, router } from "@inertiajs/react";
+import { useState } from "react";
 import POSLeft from "../Components/PosLeft";
 import POSRight from "../Components/PosRight";
-import { useState } from "react";
-import { usePage, router } from "@inertiajs/react";
 import Layout from "./Layouts/Layout";
+
 export default function Pos() {
     const [addtocart, setadd] = useState([]);
     const user = usePage().props.auth?.user || {};
@@ -14,11 +15,12 @@ export default function Pos() {
             alert("Please add items to the cart before checking out.");
         }
     };
+
     const modifycart = (cart, qty) => {
         setadd(
             addtocart.map((product) => {
                 if (product.id == cart.id) {
-                    return { ...product, order: qty };
+                    return { ...product, order: qty, total: qty * product.price };
                 } else {
                     return { ...product };
                 }

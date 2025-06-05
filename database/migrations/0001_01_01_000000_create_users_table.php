@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string("password");
             $table->string("image");
             $table->foreignIdFor(App\Models\Themes::class);
+            $table->foreignIdFor(App\Models\Role::class);
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

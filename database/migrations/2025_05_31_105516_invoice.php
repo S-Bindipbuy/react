@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
+
         Schema::create("invoice", function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(App\Models\User::class);
             $table->foreignIdFor(App\Models\Product::class);
             $table->integer("qty");
             $table->decimal("price", 10, 2);
+            $table->decimal("total", 10, 2);
             $table->softDeletes();
             $table->timestamps();
         });
