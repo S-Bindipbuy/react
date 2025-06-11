@@ -1,20 +1,19 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InvoiceController;
-/* use App\Http\Controllers\Language; */
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\Dashboard;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\User;
 // Route for Admin
 
-Route::get("/dashboard/product", [ProductController::class, "store"]);
 Route::get("/", function () {
     return redirect("login");
 });
+
 Route::middleware(Dashboard::class)->group(function () {
     Route::middleware(User::class) -> group(function () {
         Route::post('/checkout', [InvoiceController::class, 'Checkout']);
@@ -55,10 +54,5 @@ Route::get("/user/logout", [UserController::class, "Logout"]);
 Route::get("/login", function () {
     return inertia()->render("Login");
 });
-Route::post("Login", [UserController::class, "Login"]);
 
-//Route for Language
-/* Route::get("/language/{locale}", function ($locale) { */
-/*     session()->put("locale", $locale); */
-/*     return redirect()->back(); */
-/* }); */
+Route::post("Login", [UserController::class, "Login"]);

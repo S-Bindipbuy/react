@@ -36,5 +36,9 @@ class SetupApp extends Command
         $this->info('Generating application key...');
         Artisan::call('key:generate');
         $this->info('Application key generated successfully!');
+
+        $this->info('Generating Migration and Seeder');
+        Artisan::class('migrate --seed');
+        $this->info('Application Migration and Seeder Generated Complete');
     }
 }
