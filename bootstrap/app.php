@@ -12,16 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web([
-            \Illuminate\Session\Middleware\StartSession::class,
-            App\Http\Middleware\L::class,
             App\Http\Middleware\HandleInertiaRequests::class,
-        ]);
-        $middleware->api([
-            \Illuminate\Session\Middleware\StartSession::class,
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            \Illuminate\Cookie\Middleware\EncryptCookies::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
