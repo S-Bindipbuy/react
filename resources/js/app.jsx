@@ -1,8 +1,6 @@
 import React from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRoot } from "react-dom/client";
 import { createInertiaApp } from "@inertiajs/react";
-const queryClient = new QueryClient();
 
 createInertiaApp({
     resolve: (name) => {
@@ -11,9 +9,7 @@ createInertiaApp({
     },
     setup({ el, App, props }) {
         createRoot(el).render(
-            <QueryClientProvider client={queryClient}>
-                <App {...props} />
-            </QueryClientProvider>,
+            <App {...props} />
         );
     },
 });
